@@ -14,6 +14,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "beliketraveller",
   description: "Explore Karnataka - Temples, Beaches, Treks & Culture",
+  icons: {
+    icon: "/beliketraveller.png"
+  }
 };
 
 export default function RootLayout({ children }) {
