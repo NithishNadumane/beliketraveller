@@ -1,42 +1,15 @@
 // app/page.js
 import Link from "next/link";
 import Image from "next/image";
-
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer"
+import Middle1 from "./components/Middle1";
 export default function HomePage() {
-  return (
+  return (<>
+   
     <main className="min-h-screen flex flex-col">
-      {/* Hero Section */}
-      <section className="relative w-full h-[80vh] flex items-center justify-center bg-gray-900 text-white">
-        <Image
-          src="/banners/karnataka-hero.jpg"
-          alt="Be Like Traveller"
-          fill
-          priority
-          className="object-cover opacity-70"
-        />
-        <div className="relative z-10 text-center px-6">
-          <h1 className="text-4xl md:text-6xl font-bold drop-shadow-lg">
-            Be Like Traveller
-          </h1>
-          <p className="mt-4 text-lg md:text-xl">
-            Discover Karnataka – Temples, Beaches, Treks & Culture
-          </p>
-          <div className="mt-6 flex justify-center gap-4">
-            <Link
-              href="/destinations/highlights"
-              className="px-6 py-3 bg-green-600 hover:bg-green-700 rounded-xl text-white font-semibold shadow-md"
-            >
-              Explore Destinations
-            </Link>
-            <Link
-              href="/packages"
-              className="px-6 py-3 bg-white text-gray-900 hover:bg-gray-200 rounded-xl font-semibold shadow-md"
-            >
-              View Packages
-            </Link>
-          </div>
-        </div>
-      </section>
+       <Navbar/>
+      <Middle1/>
 
       {/* Highlights Grid */}
       <section className="py-16 px-6 md:px-12 bg-gray-50">
@@ -113,5 +86,6 @@ export default function HomePage() {
         </Link>
       </section>
     </main>
-  );
+    <Footer/>
+  </>);
 }
