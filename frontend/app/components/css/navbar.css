@@ -91,3 +91,70 @@
   color:#ffffff;
   font-size: 0.95rem;
 }
+/* Base navbar (desktop/laptop styles already exist) */
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* stack items vertically */
+    height: auto;
+    padding: 15px 20px;
+    align-items: flex-start;
+  }
+
+  .navleft {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .sitename {
+    font-size: 1.2rem;
+  }
+
+  .navcenter {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .navcenter ul {
+    flex-direction: column; /* menu items stack vertically */
+    gap: 15px;
+    width: 100%;
+  }
+
+  .navcenter ul li {
+    width: 100%;
+  }
+
+  .navright {
+    margin-top: 10px;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .language {
+    width: 100%;
+  }
+
+  .authbtn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .sitename {
+    font-size: 1rem;
+  }
+
+  .navcenter ul {
+    gap: 10px;
+  }
+
+  .authbtn {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+}
