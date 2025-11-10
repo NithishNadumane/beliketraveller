@@ -1,0 +1,145 @@
+.navbar{
+  width:100%;
+  background: #0c0b0b;
+  height:70px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 50px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: 0;
+  z-index: 100;
+  left:0;
+  right:0;
+  font-family: 'Segoe UI', sans-serif;
+}
+.navleft{
+  display:flex;
+  align-items: center;
+  gap:1px;
+}
+
+.navlogo {
+    width:25%;
+    height:25%;
+  border-radius: 50%; /* makes logo rounded */
+}
+
+.sitename {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #faffff;
+  text-transform: capitalize;
+}
+
+/* Right side: language + auth buttons */
+.navright {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.language {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.language:hover {
+  border-color: #2d2c2c;
+}
+/* ...existing code... */
+
+/* Auth button container */
+.authset {
+  display: flex;
+  align-items: center;
+}
+
+/* Combined auth button */
+.authbtn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  background-color: #222222;
+  color: #ffffff;
+  border: 1px solid #2d3436;
+  transition: all 0.3s ease;
+}
+
+.authbtn:hover {
+  background-color: #303030;
+  border-color: #000000;
+}
+
+
+
+.navcenter ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+  color:#ffffff;
+  font-size: 0.95rem;
+}
+/* Base navbar (desktop/laptop styles already exist) */
+
+
+/* Modal overlay */
+/* Profile section */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #1a1a1a;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.profileIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #000000;   /* black background */
+  color: #ffffff;              /* white text */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid #a7202b;   /* teal border */
+  text-transform: uppercase;
+}
+
+.profile span {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.logoutBtn {
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  background-color: #9a121d;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logoutBtn:hover {
+  background-color: #c1121f;
+}
+
+
+.logoutBtn:hover {
+  background-color: #c1121f;
+}

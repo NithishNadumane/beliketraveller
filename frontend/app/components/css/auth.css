@@ -1,0 +1,171 @@
+/* Overlay - deep black background with blur */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85); /* darker black overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(3px); /* subtle blur */
+}
+
+/* Modal Box */
+.modalBox {
+  background: #141414; /* Netflix dark */
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.6);
+  position: relative;
+  animation: fadeIn 0.35s ease-in-out;
+  color: #fff; /* white text */
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Close Button */
+.closeBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  color: #ccc;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.closeBtn:hover {
+  transform: rotate(90deg);
+  color: #e50914; /* Netflix red */
+}
+
+/* Heading */
+.modalBox h2 {
+  text-align: center;
+  margin-bottom: 1.2rem;
+  color: #e50914; /* Netflix red */
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+/* Form Styles */
+.loginForm,
+.signupForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.loginForm input,
+.signupForm input {
+  padding: 0.8rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #2b2b2b; /* dark gray input */
+  color: #fff;
+  outline: none;
+  transition: background 0.2s ease, border 0.2s ease;
+}
+
+.loginForm input:focus,
+.signupForm input:focus {
+  background: #333;
+  border: 1px solid #e50914;
+}
+
+.loginForm input::placeholder,
+.signupForm input::placeholder {
+  color: #888;
+}
+
+.loginForm button,
+.signupForm button {
+  padding: 0.8rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #e50914; /* Netflix red */
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.loginForm button:hover,
+.signupForm button:hover {
+  background: #f6121d; /* brighter red */
+  transform: translateY(-2px);
+}
+
+/* Switch between Login & Signup */
+.switchText {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 14px;
+  color: #bbb;
+}
+.switchLink {
+  color: #3512e5;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.switchLink:hover {
+  color: #f6121d;
+  text-decoration: underline;
+}
+
+/* Google Button */
+.googleBtn {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #fff; /* keep it white for contrast */
+  color: #222;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background 0.3s ease, box-shadow 0.2s ease;
+}
+
+.googleBtn:hover {
+  background: #f8f9fa;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.googleIcon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Smooth Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .modalBox {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}
