@@ -8,7 +8,6 @@ export const getImagesByDistrict = async (req, res) => {
     const result = await pool.query(
       `SELECT m.id AS media_id,
               m.url AS media_url,
-              m.type,
               p.name AS place_name,
               d.name AS district_name
        FROM media m

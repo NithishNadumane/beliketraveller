@@ -1,7 +1,15 @@
 import express from "express";
+import { sendotp, signup, login } from "../controller/authcontroller.js";
+
 const router = express.Router();
-import { sendotp, verifyotpsignup, login } from "../controller/authcontroller.js"
-router.post("/login", login)
+
+// Login route
+router.post("/login", login);
+
+// Send OTP route
 router.post("/send-otp", sendotp);
-router.post("/signup", verifyotpsignup);
-export default router;  
+
+// Signup route (verifies OTP internally)
+router.post("/signup", signup);
+
+export default router;
