@@ -13,11 +13,11 @@ export default function DistrictPage() {
   const [districtdata, setdistrictdata] = useState(null);
   const [loading, setloading] = useState(true);
   const [activeTab, setActiveTab] = useState("district");
-
+    const API = process.env.NEXT_PUBLIC_API_URL;
   useEffect(() => {
     async function fetchDistrict() {
       try {
-        const res = await axios.get(`http://localhost:5000/api/districts/${district}`);
+        const res = await axios.get(`${API}/api/districts/${district}`);
         setdistrictdata(res.data);
       } catch (error) {
         console.error("Error fetching district:", error);

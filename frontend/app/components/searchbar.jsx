@@ -1,35 +1,31 @@
 "use client"
 import { useState } from "react";
-// Removed import for useRouter as it's specific to the Next.js framework
 import axios from "axios";
 
 export default function SearchBar({ variant = "home" }) {
   const [query, setQuery] = useState("");
-  // Removed useRouter hook initialization
+
+  const API = process.env.NEXT_PUBLIC_API_URL;
 
   const handleSearch = async () => {
     if (!query.trim()) return;
 
     try {
-      const res = await axios.get(`http://localhost:5000/api/search?query=${query}`);
+      const res = await axios.get(`${API}/api/search?query=${query}`);
       const data = res.data;
 
-      // Replaced router.push with standard window.location.href for navigation
       if (data.type === "district") {
         window.location.href = `/destination/${data.name.toLowerCase()}`;
       } else if (data.type === "place") {
         window.location.href = `/destination/${data.district.toLowerCase()}/${data.name.toLowerCase().replace(/\s+/g, "-")}`;
       } else {
-        // Using a more modern UI element for messages instead of alert()
-        // would be a good next step, but for now, this works.
         console.warn("No results found!");
       }
     } catch (err) {
-      console.error(err);
-      // It's better to show an error message in the UI than use alert().
-      console.error("Something went wrong. Try again.");
+      console.error("Search error:", err);
     }
   };
+
 
   // --- Styling Logic ---
   // The new design uses a single white container with padding,
