@@ -19,11 +19,11 @@ export default function PlacePage() {
     async function fetchPlaceAndDistrict() {
       try {
         // ✅ Fetch place data
-        const placeRes = await axios.get(`http://localhost:5000/api/places/${places}`);
+        const placeRes = await axios.get(`${API}/api/places/${places}`);
         setPlacedata(placeRes.data);
 
         // ✅ Fetch district data for other tabs (rental, agency, hotel)
-        const districtRes = await axios.get(`http://localhost:5000/api/districts/${district}`);
+        const districtRes = await axios.get(`${API}/api/districts/${district}`);
         setDistrictdata(districtRes.data);
       } catch (error) {
         console.error("Error fetching place/district:", error);
