@@ -10,7 +10,7 @@ const Picture = ({ districtName }) => {
     async function fetchImages() {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/images/${districtName}`
+          `${API}/api/images/${districtName}`
         );
         setImages(res.data);
       } catch (error) {
