@@ -14,7 +14,7 @@ export default function PlacePage() {
   const [districtdata, setDistrictdata] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("district");
-
+  const API = process.env.NEXT_PUBLIC_API_URL;
   useEffect(() => {
     async function fetchPlaceAndDistrict() {
       try {
