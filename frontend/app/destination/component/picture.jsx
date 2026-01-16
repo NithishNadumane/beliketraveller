@@ -5,6 +5,7 @@ import axios from "axios";
 const Picture = ({ districtName }) => {
   const [images, setImages] = useState([]);
   const scrollRef = useRef(null);
+  const API = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     async function fetchImages() {

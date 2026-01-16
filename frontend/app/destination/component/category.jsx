@@ -6,6 +6,7 @@ import Link from "next/link";
 export default function CategoryPlaces({ districtId, districtName }) {  // ✅ added both props
   const [selectedCategory, setSelectedCategory] = useState("tp");
   const [places, setPlaces] = useState([]);
+  const API = process.env.NEXT_PUBLIC_API_URL;
 
   const categories = [
     { code: "tp", name: "Top Places" },
@@ -20,7 +21,7 @@ export default function CategoryPlaces({ districtId, districtName }) {  // ✅ a
       if (!districtId) return;
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/categories/${districtId}/${selectedCategory}`
+          `${API}/api/categories/${districtId}/${selectedCategory}`
         );
         setPlaces(res.data);
       } catch (err) {

@@ -9,12 +9,12 @@ import Chatbot from "../component/chatbot";
 export default function PlaceOverview({ placedata }) {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
-
+ const API = process.env.NEXT_PUBLIC_API_URL;
   useEffect(() => {
     async function fetchImages() {
       if (!placedata?.id) return;
       try {
-        const res = await axios.get(`http://localhost:5000/api/imagesplace/${placedata.id}`);
+        const res = await axios.get(`${API}/api/imagesplace/${placedata.id}`);
         setImages(res.data);
       } catch (error) {
         console.error("Error fetching images:", error);
