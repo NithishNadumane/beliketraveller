@@ -18,7 +18,9 @@ const Navbar = ({ districtName, districtid, onTabChange, activeTab }) => {
       const updatedUser = localStorage.getItem("user");
       setUser(updatedUser ? JSON.parse(updatedUser) : null);
     };
+
     window.addEventListener("storage", handleStorageChange);
+
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
@@ -29,7 +31,6 @@ const Navbar = ({ districtName, districtid, onTabChange, activeTab }) => {
     window.dispatchEvent(new Event("storage"));
   };
 
-  // 👇 Navigation items
   const navItems = [
     { label: districtName, key: "district" },
     { label: "Rentals", key: "rental" },
@@ -39,12 +40,14 @@ const Navbar = ({ districtName, districtid, onTabChange, activeTab }) => {
 
   return (
     <>
-      {/* Whole Navbar Wrapper */}
+      {/* Navbar Wrapper */}
       <nav className="w-full bg-black/95 shadow-md fixed top-0 left-0 right-0 z-50 font-sans">
-        {/* Top Row */}
-        <div className="px-6 h-20 flex items-center justify-between">
-          {/* Left: Logo */}
-          <div className="flex items-center gap-2">
+
+        {/* Top Section */}
+        <div className="px-4 md:px-6 py-3 md:h-20 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+
+          {/* Logo */}
+          <div className="flex items-center gap-2 justify-center md:justify-start">
             <Image
               src="/beliketravellerlogo.png"
               alt="Be Like Traveller"
@@ -57,15 +60,16 @@ const Navbar = ({ districtName, districtid, onTabChange, activeTab }) => {
             </span>
           </div>
 
-          {/* Center: Search Bar */}
-          <div className="flex-1 flex justify-center">
+          {/* Search Bar */}
+          <div className="w-full md:flex-1 flex justify-center">
             <div className="w-full max-w-md">
               <SearchBar variant="navbar" />
             </div>
           </div>
 
-          {/* Right: Language + Auth */}
-          <div className="flex items-center gap-4">
+          {/* Language + Auth */}
+          <div className="flex items-center justify-center md:justify-end gap-3">
+
             <select className="p-2 rounded border border-gray-300 bg-white text-sm">
               <option value="en">English</option>
             </select>
@@ -75,7 +79,11 @@ const Navbar = ({ districtName, districtid, onTabChange, activeTab }) => {
                 <div className="w-9 h-9 rounded-full bg-black text-white flex items-center justify-center font-semibold">
                   {user.name ? user.name.charAt(0).toUpperCase() : "U"}
                 </div>
-                <span className="text-white font-medium">{user.name}</span>
+
+                <span className="text-white font-medium hidden sm:block">
+                  {user.name}
+                </span>
+
                 <button
                   onClick={handleLogout}
                   className="bg-red-700 hover:bg-red-600 text-white px-2 py-1 rounded text-xs transition"
@@ -91,15 +99,18 @@ const Navbar = ({ districtName, districtid, onTabChange, activeTab }) => {
                 Login / Signup
               </button>
             )}
+
           </div>
+
         </div>
 
-        {/* Second Row: Categories */}
-        <div className="flex justify-center gap-8 px-6 py-3 text-white text-sm font-medium">
+        {/* Bottom Category Tabs */}
+        <div className="flex gap-4 md:gap-8 px-4 md:px-6 py-3 text-white text-sm font-medium overflow-x-auto whitespace-nowrap justify-start md:justify-center">
+
           {navItems.map((item) => (
             <button
               key={item.key}
-              onClick={() => onTabChange(item.key)} // 👈 Parent tab switch trigger
+              onClick={() => onTabChange(item.key)}
               className={`relative px-4 py-2 transition-all duration-300 rounded-full ${
                 activeTab === item.key
                   ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg scale-105"
@@ -109,10 +120,12 @@ const Navbar = ({ districtName, districtid, onTabChange, activeTab }) => {
               {item.label}
             </button>
           ))}
+
         </div>
+
       </nav>
 
-      {/* Login / Signup Modals */}
+      {/* Login Modal */}
       {showlogin && (
         <Loginmodal
           onClose={() => setshowlogin(false)}
@@ -122,6 +135,8 @@ const Navbar = ({ districtName, districtid, onTabChange, activeTab }) => {
           }}
         />
       )}
+
+      {/* Signup Modal */}
       {showsignup && (
         <Signup
           onClose={() => setshowsignup(false)}
