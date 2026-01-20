@@ -21,13 +21,15 @@
   filter: brightness(1.1);
   transition: filter 0.5s ease-in-out;
 }
+
 .bgImage:hover{
   filter:brightness(1.2);
 }
+
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.30); /* Lighter black overlay for hero focus */
+  background: rgba(0, 0, 0, 0.30);
   z-index: 1;
 }
 
@@ -42,16 +44,16 @@
   align-items: center;
   justify-content: flex-start; 
   text-align: center;
-  top: 3%; /* move content below center */
+  top: 3%;
 }
 
 /* Quote Styling */
 .heroQuote {
-  font-size: 1.6rem; /* slightly bigger */
+  font-size: 1.6rem;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 1.8rem; /* space between quote and search box */
-  text-shadow: 3px 3px 14px rgba(0, 0, 0, 0.8); /* stronger shadow */
+  margin-bottom: 1.8rem;
+  text-shadow: 3px 3px 14px rgba(0, 0, 0, 0.8);
   animation: fadeInUp 1.2s ease-in-out;
   max-width: 100%;
 }
@@ -68,29 +70,34 @@
   }
 }
 
-/* Modern Search Box Styling */
-
-/* --- Existing code remains the same --- */
+/* ================= MOBILE FIX ================= */
 
 /* Tablet & small screens */
 @media (max-width: 768px) {
+
   .heroSection {
-    height: 70vh; /* reduce height */
+    height: 75vh; /* improved mobile ratio */
+  }
+
+  .bgImage {
+    object-fit: cover;
+    object-position: center; /* NEW: prevents bad cropping */
   }
 
   .heroContent {
-    top: 0; /* reset position */
+    top: 0;
     padding: 0.5rem;
+    justify-content: center; /* NEW: vertical centering */
   }
 
   .heroQuote {
-    font-size: 1.3rem; /* shrink text */
+    font-size: 1.3rem;
     margin-bottom: 1.2rem;
     padding: 0 10px;
   }
 
   .searchBox {
-    flex-direction: column; /* stack input + button */
+    flex-direction: column;
     padding: 12px 14px;
     border-radius: 18px;
     max-width: 90%;
@@ -114,12 +121,18 @@
 
 /* Very small phones */
 @media (max-width: 480px) {
+
   .heroSection {
-    height: 65vh;
+    height: 70vh; /* better tall phone fit */
+  }
+
+  .bgImage {
+    object-position: center top; /* NEW: fixes tall phone cropping */
   }
 
   .heroQuote {
-    font-size: 1.1rem; /* even smaller text */
+    margin-top: 20px; 
+    font-size: 1.1rem;
     line-height: 1.4;
   }
 
@@ -138,4 +151,3 @@
     padding: 10px;
   }
 }
- 

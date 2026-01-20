@@ -13,6 +13,7 @@
   right:0;
   font-family: 'Segoe UI', sans-serif;
 }
+
 .navleft{
   display:flex;
   align-items: center;
@@ -20,9 +21,9 @@
 }
 
 .navlogo {
-    width:25%;
-    height:25%;
-  border-radius: 50%; /* makes logo rounded */
+  width:25%;
+  height:25%;
+  border-radius: 50%;
 }
 
 .sitename {
@@ -32,7 +33,20 @@
   text-transform: capitalize;
 }
 
-/* Right side: language + auth buttons */
+/* Center Menu */
+
+.navcenter ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+  color:#ffffff;
+  font-size: 0.95rem;
+}
+
+/* Right Side */
+
 .navright {
   display: flex;
   align-items: center;
@@ -52,15 +66,14 @@
 .language:hover {
   border-color: #2d2c2c;
 }
-/* ...existing code... */
 
-/* Auth button container */
+/* Auth */
+
 .authset {
   display: flex;
   align-items: center;
 }
 
-/* Combined auth button */
 .authbtn {
   padding: 8px 16px;
   border-radius: 8px;
@@ -78,22 +91,8 @@
   border-color: #000000;
 }
 
+/* Profile */
 
-
-.navcenter ul {
-  list-style: none;
-  display: flex;
-  gap: 30px;
-  padding: 0;
-  margin: 0;
-  color:#ffffff;
-  font-size: 0.95rem;
-}
-/* Base navbar (desktop/laptop styles already exist) */
-
-
-/* Modal overlay */
-/* Profile section */
 .profile {
   display: flex;
   align-items: center;
@@ -107,14 +106,14 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: #000000;   /* black background */
-  color: #ffffff;              /* white text */
+  background-color: #000000;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1rem;
   font-weight: 600;
-  border: 2px solid #a7202b;   /* teal border */
+  border: 2px solid #a7202b;
   text-transform: uppercase;
 }
 
@@ -140,6 +139,102 @@
 }
 
 
-.logoutBtn:hover {
-  background-color: #c1121f;
+/* ================= MOBILE SIZE REDUCTION ================= */
+/* ===== CLEAN MOBILE SPACING FIX ===== */
+/* ===== PERFECT MOBILE SPACING & FONT FIX ===== */
+
+@media (max-width: 768px) {
+
+  .navbar {
+    height: 48px;
+    padding: 4px 12px;
+    gap: 14px; /* space between navleft navcenter navright */
+  }
+
+  /* LEFT */
+
+  .navleft {
+    gap: 3px;
+  }
+
+  .navlogo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .sitename {
+    font-size: 0.8rem;
+  }
+
+  /* CENTER MENU */
+
+  .navcenter ul {
+    gap: 14px;         /* balanced spacing */
+    font-size: 0.65rem;
+    padding: 0 4px;
+  }
+
+  /* RIGHT */
+
+  .navright {
+    gap: 10px;
+  }
+
+  .language {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+
+  .authbtn {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+  }
+
+  /* PROFILE */
+
+  .profile {
+    padding: 3px 6px;
+    gap: 4px;
+  }
+
+  .profileIcon {
+    width: 20px;
+    height: 20px;
+    font-size: 0.65rem;
+  }
+
+  .profile span {
+    font-size: 0.65rem;
+  }
+
+  .logoutBtn {
+    font-size: 0.6rem;
+    padding: 2px 6px;
+  }
+}
+
+
+/* ===== EXTRA SMALL PHONES ===== */
+
+@media (max-width: 480px) {
+
+  .navbar {
+    height: 44px;
+    padding: 3px 10px;
+    gap: 10px;
+  }
+
+  .sitename {
+    font-size: 0.75rem;
+  }
+
+  .navcenter ul {
+    gap: 10px;
+    font-size: 0.6rem;
+  }
+
+  .language,
+  .authbtn {
+    font-size: 0.6rem;
+  }
 }
