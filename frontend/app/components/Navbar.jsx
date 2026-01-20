@@ -48,9 +48,7 @@ const Navbar = () => {
         </div>
 
         <div className='navright'>
-          <select className='language'>
-            <option value='en'>English</option>
-          </select>
+          
 
           <div className='authset'>
            {user ? (
