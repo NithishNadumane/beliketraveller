@@ -3,17 +3,17 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-export default function CategoryPlaces({ districtId, districtName }) {  // ✅ added both props
+export default function CategoryPlaces({ districtId, districtName }) {
   const [selectedCategory, setSelectedCategory] = useState("tp");
   const [places, setPlaces] = useState([]);
   const API = process.env.NEXT_PUBLIC_API_URL;
 
   const categories = [
-    { code: "tp", name: "Top Places" },
-    { code: "ch", name: "Cultural & Heritage" },
-    { code: "no", name: "Nature & Outdoors" },
-    { code: "ad", name: "Adventures" },
-    { code: "hg", name: "Hidden Gems" },
+    { code: "tp", short: "Top", full: "Top Places" },
+    { code: "ch", short: "Culture", full: "Cultural & Heritage" },
+    { code: "no", short: "Nature", full: "Nature & Outdoors" },
+    { code: "ad", short: "Adventure", full: "Adventures" },
+    { code: "hg", short: "Hidden", full: "Hidden Gems" },
   ];
 
   useEffect(() => {
@@ -32,26 +32,38 @@ export default function CategoryPlaces({ districtId, districtName }) {  // ✅ a
   }, [districtId, selectedCategory]);
 
   return (
-    <div className="p-5 ml-20 mr-20">
+    <div className="p-3 sm:p-4 lg:p-5 mx-4 sm:mx-10 lg:ml-20 lg:mr-20">
+
       {/* Category Bar */}
-      <div className="flex overflow-x-auto space-x-4 pb-4 scrollbar-hide justify-center">
+      <div className="flex flex-nowrap justify-between sm:justify-center gap-1 sm:gap-3 lg:gap-4 pb-4">
         {categories.map((cat) => (
           <button
             key={cat.code}
             onClick={() => setSelectedCategory(cat.code)}
-            className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
-              selectedCategory === cat.code
-                ? "bg-green-600 text-white shadow-lg scale-105"
-                : "bg-gray-100 text-gray-700 hover:bg-green-100 hover:text-green-700"
-            }`}
+            className={`px-2 sm:px-4 lg:px-5 py-1 sm:py-2 
+              rounded-md sm:rounded-full 
+              text-[10px] sm:text-sm 
+              font-semibold transition-all duration-300
+              ${
+                selectedCategory === cat.code
+                  ? "bg-green-600 text-white shadow-md scale-105"
+                  : "bg-gray-100 text-gray-700 hover:bg-green-100 hover:text-green-700"
+              }`}
           >
-            {cat.name}
+            <span className="block sm:hidden">{cat.short}</span>
+            <span className="hidden sm:block">{cat.full}</span>
           </button>
         ))}
       </div>
 
-      {/* Places List */}
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Places Grid */}
+      <div
+        className="
+          mt-2 sm:mt-6 lg:mt-8
+          grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3
+          gap-3 sm:gap-6 lg:gap-8
+        "
+      >
         {places.length > 0 ? (
           places.map((place) => (
             <Link
@@ -60,23 +72,30 @@ export default function CategoryPlaces({ districtId, districtName }) {  // ✅ a
                 ?.toLowerCase()
                 .replace(/\s+/g, "-")}/${place.name
                 .toLowerCase()
-                .replace(/\s+/g, "-")}`} // ✅ matches your search URL structure
-              passHref
+                .replace(/\s+/g, "-")}`}
             >
-              <div className="bg-white border rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer">
-                <div className="overflow-hidden rounded-t-2xl">
+              <div className="bg-white border rounded-lg sm:rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer">
+
+                {/* Image */}
+                <div className="overflow-hidden rounded-t-lg sm:rounded-t-2xl">
                   <img
                     src={place.image_url}
                     alt={place.name}
-                    className="w-full h-56 object-cover transform hover:scale-110 transition-transform duration-500"
+                    className="w-full h-28 sm:h-52 lg:h-56 object-cover transform hover:scale-110 transition-transform duration-500"
                   />
                 </div>
-                <div className="p-5">
-                  <h3 className="text-lg font-bold text-gray-800">{place.name}</h3>
-                  <p className="text-gray-600 text-sm mt-2 line-clamp-2">
+
+                {/* Content */}
+                <div className="p-2 sm:p-4 lg:p-5">
+                  <h3 className="text-xs sm:text-lg font-bold text-gray-800 truncate">
+                    {place.name}
+                  </h3>
+
+                  <p className="hidden sm:block text-gray-600 text-sm mt-2 line-clamp-2">
                     {place.description}
                   </p>
                 </div>
+
               </div>
             </Link>
           ))
@@ -86,6 +105,7 @@ export default function CategoryPlaces({ districtId, districtName }) {  // ✅ a
           </p>
         )}
       </div>
+
     </div>
   );
 }
