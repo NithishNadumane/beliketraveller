@@ -5,8 +5,8 @@ import axios from "axios";
 import Navbar from "../component/navbar";
 import Rentals from "../rentals/rentals";
 import Overview from "../districtoverview/overview"; 
-// import TravelAgency from "../component/travelagency";
-// import Hotels from "../component/hotels";
+import TravelAgency from "../travelagency/travelagency";
+import Hotels from "../stay&food/stay.jsx";
 
 export default function DistrictPage() {
   const { district } = useParams();

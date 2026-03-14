@@ -2,37 +2,46 @@ import pool from "../db.js";
 
 export const searchplace = async (req, res) => {
   try {
-    const query = req.query.query; // matches frontend: axios.get(...?query=${query})
+    const { query } = req.query;
+
     if (!query) {
-      return res.status(400).json({ error: "Query parameter 'query' is required" });
+      return res.json({ results: [] });
     }
 
-    // Search districts
+    // 🔥 Search districts (limit 5)
     const districts = await pool.query(
-      `SELECT id, name, description, latitude, longitude
+      `SELECT id, name
        FROM districts
-       WHERE LOWER(name) LIKE LOWER($1)`,
+       WHERE name ILIKE $1
+       LIMIT 5`,
       [`%${query}%`]
     );
 
-    // Search places
+    // 🔥 Search places (limit 5)
     const places = await pool.query(
-      `SELECT p.id, p.name, p.description, p.latitude, p.longitude, d.name AS district_name
+      `SELECT p.id, p.name, d.name AS district_name
        FROM places p
        JOIN districts d ON p.district_id = d.id
-       WHERE LOWER(p.name) LIKE LOWER($1) OR LOWER(d.name) LIKE LOWER($1)`,
+       WHERE p.name ILIKE $1 OR d.name ILIKE $1
+       LIMIT 5`,
       [`%${query}%`]
     );
 
-    // Decide what to return for frontend routing
-    if (districts.rows.length > 0) {
-      return res.json({ type: "district", name: districts.rows[0].name });
-    } else if (places.rows.length > 0) {
-      const place = places.rows[0];
-      return res.json({ type: "place", district: place.district_name, name: place.name });
-    } else {
-      return res.json({ type: "none" });
-    }
+    // 🔥 Combine & limit total 5
+    const results = [
+      ...districts.rows.map((d) => ({
+        type: "district",
+        name: d.name,
+      })),
+      ...places.rows.map((p) => ({
+        type: "place",
+        name: p.name,
+        district: p.district_name,
+      })),
+    ].slice(0, 5);
+
+    return res.json({ results });
+
   } catch (err) {
     console.error("Error in searchHandler:", err.message);
     res.status(500).json({ error: "Server error" });

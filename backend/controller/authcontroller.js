@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS,
   },
 });
-
+ 
 // 🔹 Send OTP
 export const sendotp = async (req, res) => {
   const { email } = req.body;

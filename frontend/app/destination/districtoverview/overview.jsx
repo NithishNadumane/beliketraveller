@@ -9,7 +9,7 @@ const DistrictOverview = ({ districtdata }) => {
   return (
     <>
       {/* District header section */}
-      <div className="mt-[150px] sm:mt-32 lg:mt-40 max-w-4xl mx-4 sm:mx-10 lg:ml-20 lg:mr-20">
+      <div className="mt-6 max-w-4xl mx-4 sm:mx-10 lg:mx-20">
         <BlurText
           text={districtdata.name}
           className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center"

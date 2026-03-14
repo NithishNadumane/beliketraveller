@@ -8,7 +8,7 @@ import Middle1 from "./components/Middle1";
 export default function HomePage() {
   return (<>
    
-    <main className="min-h-screen flex flex-col">
+    <main >
       <Navbar/>
       <Middle1/>
       
@@ -17,7 +17,7 @@ export default function HomePage() {
         <h2 className="text-3xl font-bold text-center mb-10">
           Start Your Journey
         </h2>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">  
           <Link
             href="/travelagency"
             className="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition"

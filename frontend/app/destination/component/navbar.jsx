@@ -34,31 +34,35 @@ const Navbar = ({ districtName, districtid, onTabChange, activeTab }) => {
     { label: districtName, key: "district" },
     { label: "Rentals", key: "rental" },
     { label: "Travel Agency", key: "agency" },
-    { label: "Hotels", key: "hotel" },
+    { label: "Stay & Food", key: "hotel" },
   ];
 
   return (
     <>
       {/* NAVBAR */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/95 shadow-md font-sans">
+      <nav className="sticky top-0 left-0 right-0 z-50 bg-black/95 shadow-lg font-sans backdrop-blur-md">
 
         {/* ===== TOP SECTION ===== */}
-        <div className="px-3 md:px-6 py-1 md:py-3 md:h-20 flex flex-col md:flex-row md:items-center md:justify-between gap-1 md:gap-3">
+        <div className="px-4 md:px-8 py-2 md:py-3 md:h-20 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
 
           {/* MOBILE ROW 1 : LOGO + LOGIN */}
           <div className="flex items-center justify-between">
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
+
+              {/* BIGGER LOGO */}
               <Image
                 src="/beliketravellerlogo.png"
                 alt="Be Like Traveller"
-                width={32}
-                height={32}
-                className="rounded-full md:w-[50px] md:h-[50px]"
+                width={44}
+                height={44}
+                className="rounded-full md:w-[65px] md:h-[65px] shadow-md"
               />
-              <span className="text-white text-[13px] md:text-xl font-bold">
+
+              <span className="text-white text-[14px] md:text-2xl font-semibold tracking-wide">
                 beliketraveller
               </span>
+
             </div>
 
             {/* Mobile Login */}
@@ -66,14 +70,14 @@ const Navbar = ({ districtName, districtid, onTabChange, activeTab }) => {
               {user ? (
                 <button
                   onClick={handleLogout}
-                  className="bg-red-700 text-white px-2 py-[2px] rounded text-[10px]"
+                  className="bg-black border border-gray-700 text-white px-3 py-[3px] rounded-md text-[11px]"
                 >
                   Logout
                 </button>
               ) : (
                 <button
                   onClick={() => setshowlogin(true)}
-                  className="bg-gray-800 text-white px-2 py-[2px] rounded text-[10px]"
+                  className="bg-black border border-gray-700 text-white px-3 py-[3px] rounded-md text-[11px]"
                 >
                   Login
                 </button>
@@ -90,29 +94,31 @@ const Navbar = ({ districtName, districtid, onTabChange, activeTab }) => {
           </div>
 
           {/* DESKTOP AUTH */}
-          <div className="hidden md:flex items-center justify-end gap-3">
+          <div className="hidden md:flex items-center justify-end gap-4">
 
             {user ? (
-              <div className="flex items-center gap-2 bg-gray-800 p-2 rounded">
-                <div className="w-9 h-9 rounded-full bg-black text-white flex items-center justify-center font-semibold">
+              <div className="flex items-center gap-3 bg-black border border-gray-700 px-3 py-2 rounded-xl shadow-md">
+
+                <div className="w-10 h-10 rounded-full bg-gray-900 text-white flex items-center justify-center font-semibold shadow">
                   {user.name ? user.name.charAt(0).toUpperCase() : "U"}
                 </div>
 
-                <span className="text-white font-medium">
+                <span className="text-white font-semibold tracking-wide">
                   {user.name}
                 </span>
 
                 <button
                   onClick={handleLogout}
-                  className="bg-red-700 hover:bg-red-600 text-white px-2 py-1 rounded text-xs"
+                  className="bg-black border border-red-700 hover:bg-red-700 text-white px-3 py-1 rounded-lg text-xs font-semibold transition"
                 >
                   Logout
                 </button>
+
               </div>
             ) : (
               <button
                 onClick={() => setshowlogin(true)}
-                className="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm"
+                className="bg-black border border-gray-700 hover:border-white text-white px-5 py-2 rounded-xl text-sm font-semibold tracking-wide shadow-md transition"
               >
                 Login / Signup
               </button>
@@ -122,20 +128,20 @@ const Navbar = ({ districtName, districtid, onTabChange, activeTab }) => {
 
         </div>
 
-        {/* ===== CATEGORY TABS (CENTERED FIX) ===== */}
-        <div className="w-full flex justify-center">
+        {/* ===== CATEGORY TABS ===== */}
+        <div className="w-full flex justify-center border-t border-gray-800">
 
-          <div className="flex gap-2 md:gap-8 px-3 md:px-6 py-[2px] md:py-3 
-            text-white text-[10px] md:text-sm font-medium 
+          <div className="flex gap-3 md:gap-10 px-4 md:px-8 py-2 
+            text-white text-[11px] md:text-base font-semibold tracking-wide
             overflow-x-auto whitespace-nowrap">
 
             {navItems.map((item) => (
               <button
                 key={item.key}
                 onClick={() => onTabChange(item.key)}
-                className={`px-2 md:px-4 py-[2px] md:py-2 rounded-full transition-all duration-300 ${
+                className={`px-3 md:px-5 py-1 md:py-2 rounded-full transition-all duration-300 ${
                   activeTab === item.key
-                    ? "bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg scale-105"
+                    ? "bg-gradient-to-r from-purple-500 to-pink-500 shadow-xl scale-110"
                     : "hover:text-pink-400"
                 }`}
               >

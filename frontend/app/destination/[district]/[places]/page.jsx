@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../../component/navbar";
 import Rentals from "../../rentals/rentals";
-// import Overview from "../districtoverview/overview"; 
-// import Hotels from "../component/hotels";
+// import Overview from "../districtoverview/overview";
+import Hotels from "../../stay&food/stay";
+import TravelAgency from "../../travelagency/travelagency";
 import PlaceOverview from "../../districtoverview/place"; // 👈 You can rename this to your place overview component
 
 export default function PlacePage() {
@@ -49,7 +50,7 @@ export default function PlacePage() {
       />
 
       {/* ✅ Render based on tab selection */}
-      <div className="pt-32">
+      <div className="">
         {/* 🔹 Place info under 'district' tab */}
         {activeTab === "district" && <PlaceOverview placedata={placedata} />}
 

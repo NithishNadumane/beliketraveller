@@ -44,7 +44,7 @@
     const fourWheelers = rentals.filter((r) => r.type.includes("4"));
 
     return (
-      <div className="mt-40 max-w-6xl mx-auto">
+      <div className="p-6 max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold mb-4 text-center">Rentals</h1>
 
         {/* 🛵 Two-Wheelers */}
