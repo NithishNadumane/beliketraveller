@@ -10,7 +10,7 @@ const Rentals = ({ districtId }) => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://localhost:5000/api/rentals/${districtId}`
+        `${API}/api/rentals/${districtId}`
       );
       setRentals(response.data);
     } catch (err) {

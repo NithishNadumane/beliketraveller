@@ -18,7 +18,7 @@ export default function StayFood({ districtId }) {
         if (category === "stays") table = "stays";
 
         const res = await axios.get(
-          `http://localhost:5000/api/stayfood/${table}?districtId=${districtId}`
+          `${API}/api/stayfood/${table}?districtId=${districtId}`
         );
 
         setData(res.data);
