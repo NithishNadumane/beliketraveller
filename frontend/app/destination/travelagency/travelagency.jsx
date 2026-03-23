@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const TravelAgency = ({ districtId }) => {
+   const API = process.env.NEXT_PUBLIC_API_URL;
   const [agencies, setAgencies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const Rentals = ({ districtId }) => {
+   const API = process.env.NEXT_PUBLIC_API_URL;
   const [rentals, setRentals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

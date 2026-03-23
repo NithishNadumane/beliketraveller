@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function StayFood({ districtId }) {
-
+   const API = process.env.NEXT_PUBLIC_API_URL;
   const [category, setCategory] = useState("food");
   const [data, setData] = useState([]);
 
