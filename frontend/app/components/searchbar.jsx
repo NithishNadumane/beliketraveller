@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function SearchBar({ variant = "home" }) {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const router = useRouter();
 
   const API = process.env.NEXT_PUBLIC_API_URL;
 
@@ -33,12 +35,14 @@ export default function SearchBar({ variant = "home" }) {
       if (!data) return;
 
       if (data.type === "district") {
-        window.location.href = `/destination/${data.name.toLowerCase()}`;
+        router.push(`/destination/${data.name.toLowerCase()}`);
       } else if (data.type === "place") {
-        window.location.href = `/destination/${data.district
-          .toLowerCase()}/${data.name
-          .toLowerCase()
-          .replace(/\s+/g, "-")}`;
+        router.push(
+          `/destination/${data.district
+            .toLowerCase()}/${data.name
+            .toLowerCase()
+            .replace(/\s+/g, "-")}`
+        );
       }
 
       setSuggestions([]);
@@ -83,43 +87,39 @@ export default function SearchBar({ variant = "home" }) {
       </button>
 
       {/* 🔥 Autocomplete Dropdown */}
-{suggestions.length > 0 && (
-  <div className="absolute top-full left-0 w-full bg-white rounded-xl shadow-lg mt-2 overflow-hidden z-50 border border-red-100">
-    
-    {suggestions.map((item, index) => (
-      <div
-        key={index}
-        onClick={() => handleSearch(item)}
-        className="flex items-center justify-between px-3 py-2 cursor-pointer transition-all duration-150 hover:bg-red-50"
-      >
-        <div className="flex items-center gap-2">
-          <span className="text-red-500 text-sm">
-            {item.type === "district" ? "📍" : "🏝️"}
-          </span>
+      {suggestions.length > 0 && (
+        <div className="absolute top-full left-0 w-full bg-white rounded-xl shadow-lg mt-2 overflow-hidden z-50 border border-red-100">
+          {suggestions.map((item, index) => (
+            <div
+              key={index}
+              onClick={() => handleSearch(item)}
+              className="flex items-center justify-between px-3 py-2 cursor-pointer transition-all duration-150 hover:bg-red-50"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-red-500 text-sm">
+                  {item.type === "district" ? "📍" : "🏝️"}
+                </span>
 
-          <div className="flex flex-col leading-tight">
-            <span className="text-xs font-semibold text-gray-800">
-              {item.name}
-            </span>
+                <div className="flex flex-col leading-tight">
+                  <span className="text-xs font-semibold text-gray-800">
+                    {item.name}
+                  </span>
 
-            {item.type === "place" && (
-              <span className="text-[10px] text-gray-500">
-                {item.district}
+                  {item.type === "place" && (
+                    <span className="text-[10px] text-gray-500">
+                      {item.district}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <span className="text-[10px] text-red-400">
+                {item.type === "district" ? "District" : "Place"}
               </span>
-            )}
-          </div>
+            </div>
+          ))}
         </div>
-
-        <span className="text-[10px] text-red-400">
-          {item.type === "district" ? "District" : "Place"}
-        </span>
-      </div>
-    ))}
-
-  </div>
-)}
-
-
+      )}
     </div>
   );
 }

@@ -17,6 +17,20 @@ export async function getreviews(req, res) {
     res.status(500).json({ message: "Internal server error" });
   }
 }
-// export async function addreviews(req, res) {
+export async function addreviews(req, res) {
+  const { placeId, username, rating, comment } = req.body;
 
-// }
+  try {
+    await pool.query(
+      `INSERT INTO reviews (place_id, rating, comment, name)
+       VALUES ($1, $2, $3, $4)`,
+      [placeId, rating, comment, username]
+    );
+
+    res.status(201).json({ message: "Review added successfully" });
+
+  } catch (error) {
+    console.error("Error adding review:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}

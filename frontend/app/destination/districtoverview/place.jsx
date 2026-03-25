@@ -118,10 +118,7 @@ export default function PlaceOverview({ placedata }) {
 
       {/* ================= REVIEWS SECTION ================= */}
       <section className="max-w-7xl mx-auto px-6 py-10">
-        <h2 className="text-3xl font-semibold mb-6">
-          User Reviews
-        </h2>
-
+        
         <div className="bg-white rounded-xl shadow-md p-4">
           <Review placeId={placedata.id} />
         </div>

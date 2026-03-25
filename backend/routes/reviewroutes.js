@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router(); 
-import { getreviews } from '../controller/reviewcontroller.js';
+import { getreviews,addreviews } from '../controller/reviewcontroller.js';
 router.get('/:placeId', getreviews);
-// router.post('/', addreviews);
+router.post('/', addreviews);
 export default router;
