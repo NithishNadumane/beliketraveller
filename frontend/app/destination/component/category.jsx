@@ -60,7 +60,7 @@ export default function CategoryPlaces({ districtId, districtName }) {
       <div
         className="
           mt-2 sm:mt-6 lg:mt-8
-          grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3
+          grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3
           gap-3 sm:gap-6 lg:gap-8
         "
       >
