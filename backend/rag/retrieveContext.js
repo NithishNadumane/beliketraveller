@@ -1,18 +1,17 @@
 import { generateEmbedding } from "./embedding.js";
-import { collection } from "./chromaClient.js";
+import { index } from "./pineconeClient.js";
 
 export const retrieveContext = async (question) => {
+  const [embedding] = await generateEmbedding(question);
 
-  const embedding = await generateEmbedding(question);
-
-  const result = await collection.query({
-    queryEmbeddings: [embedding],
-    nResults: 3
+  const result = await index.query({
+    vector: embedding,
+    topK: 2, // ⚡ reduced from 3
+    includeMetadata: true,
+    namespace: "default"
   });
 
-  if (!result.documents || result.documents.length === 0) {
-    return "";
-  }
-
-  return result.documents[0].join("\n");
+  return result.matches
+    .map(match => match.metadata.text)
+    .join("\n");
 };

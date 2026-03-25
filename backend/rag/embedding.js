@@ -3,25 +3,26 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const HF_API_URL =
-"https://api-inference.huggingface.co/pipeline/feature-extraction/sentence-transformers/all-MiniLM-L6-v2";
-
 export const generateEmbedding = async (text) => {
-
-  const response = await axios.post(
-    HF_API_URL,
-    {
-      inputs: text
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.HF_API_KEY}`,
-        "Content-Type": "application/json"
+  try {
+    const response = await axios.post(
+      "https://api.jina.ai/v1/embeddings",
+      {
+        input: Array.isArray(text) ? text : [text],
+        model: "jina-embeddings-v2-base-en"
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.JINA_API_KEY}`,
+          "Content-Type": "application/json"
+        }
       }
-    }
-  );
+    );
 
-  const embedding = response.data.flat();
+    return response.data.data.map(d => d.embedding);
 
-  return embedding;
+  } catch (err) {
+    console.error("Embedding error:", err.response?.data || err.message);
+    throw err;
+  }
 };

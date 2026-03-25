@@ -50,7 +50,37 @@ const Chatbot = () => {
                     : "bg-gray-400 rounded-bl-none"
                 }`}
               >
-                {msg.text}
+                {msg.sender === "bot" ? (
+                  <div className="space-y-1 leading-relaxed">
+                    {msg.text.split("\n").map((line, i) => {
+                      const trimmed = line.trim();
+
+                      // numbered list
+                      if (/^\d+\./.test(trimmed)) {
+                        return (
+                          <div key={i} className="flex gap-2">
+                            <span>•</span>
+                            <span>{trimmed.replace(/^\d+\.\s*/, "")}</span>
+                          </div>
+                        );
+                      }
+
+                      // bullet list
+                      if (/^[•\-]/.test(trimmed)) {
+                        return (
+                          <div key={i} className="flex gap-2">
+                            <span>•</span>
+                            <span>{trimmed.replace(/^[•\-]\s*/, "")}</span>
+                          </div>
+                        );
+                      }
+
+                      return <div key={i}>{trimmed}</div>;
+                    })}
+                  </div>
+                ) : (
+                  msg.text
+                )}
               </div>
             </div>
           ))}
