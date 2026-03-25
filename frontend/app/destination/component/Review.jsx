@@ -50,10 +50,10 @@ const ReviewSection = ({ placeId }) => {
     <div className="mt-6 border-t pt-6">
       <h2 className="text-2xl font-semibold mb-4">User Reviews</h2>
 
-      <div className="flex gap-6">
+      <div className="flex flex-col md:flex-row gap-6">
         
         {/* LEFT SIDE - REVIEWS */}
-        <div className="w-2/3 bg-gray-50 p-4 rounded-xl shadow h-[400px] overflow-y-auto">
+        <div className="w-full md:w-2/3 bg-gray-50 p-4 rounded-xl shadow h-[400px] overflow-y-auto">
           {reviews.length === 0 ? (
             <p className="text-gray-600">
               No reviews yet. Be the first to share!
@@ -81,7 +81,7 @@ const ReviewSection = ({ placeId }) => {
         </div>
 
         {/* RIGHT SIDE - ADD REVIEW */}
-        <div className="w-1/3 bg-white p-4 rounded-xl shadow">
+        <div className="w-full md:w-1/3 bg-white p-4 rounded-xl shadow">
           <h3 className="text-lg font-semibold mb-3">Add Review</h3>
 
           <form onSubmit={handleSubmit} className="space-y-3">
