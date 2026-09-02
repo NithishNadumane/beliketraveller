@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import './css/navbar.css'
 import Image from 'next/image'
-import Loginmodal from './loginn';  
-import Signup from './signupp';
+import Loginmodal from './loginn'
+import Signup from './signupp' 
+import ForgotPassword from './ForgotPassword'
 
 const Navbar = () => {
-  const [showlogin, setshowlogin] = useState(false);
-  const [showsignup, setshowsignup] = useState(false);
+  const [mode, setMode] = useState(null); // 👈 login | signup | forgot | null
   const [user, setUser] = useState(null);
 
   // ✅ load user from storage 
@@ -20,6 +20,7 @@ const Navbar = () => {
       const updatedUser = localStorage.getItem("user");
       setUser(updatedUser ? JSON.parse(updatedUser) : null);
     };
+
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
@@ -48,37 +49,50 @@ const Navbar = () => {
         </div>
 
         <div className='navright'>
-          
-
           <div className='authset'>
-           {user ? (
-  <div className="profile">
-    <div className="profileIcon">
-      {user.name ? user.name.charAt(0).toUpperCase() : "U"}
-    </div>
-    <span>{user.name}</span>
-    <button onClick={handleLogout} className="logoutBtn">Logout</button>
-  </div>
-) : (
-  <button className='authbtn' onClick={() => setshowlogin(true)}>Login / Signup</button>
-)}
-
+            {user ? (
+              <div className="profile">
+                <div className="profileIcon">
+                  {user.name ? user.name.charAt(0).toUpperCase() : "U"}
+                </div>
+                <span>{user.name}</span>
+                <button onClick={handleLogout} className="logoutBtn">Logout</button>
+              </div>
+            ) : (
+              <button className='authbtn' onClick={() => setMode("login")}>
+                Login / Signup
+              </button>
+            )}
           </div>
         </div>
       </nav>
 
-      {showlogin && (
-        <Loginmodal onClose={() => setshowlogin(false)}
-          switchtosignup={() => { setshowlogin(false); setshowsignup(true) }}
+      {/* 🔥 Login */}
+      {mode === "login" && (
+        <Loginmodal
+          onClose={() => setMode(null)}
+          switchtosignup={() => setMode("signup")}
+          switchtoforgot={() => setMode("forgot")}
         />
       )}
-      {showsignup && (
-        <Signup onClose={() => setshowsignup(false)}
-          switchtologin={() => { setshowlogin(true); setshowsignup(false) }}
+
+      {/* 🔥 Signup */}
+      {mode === "signup" && (
+        <Signup
+          onClose={() => setMode(null)}
+          switchtologin={() => setMode("login")}
+        />
+      )}
+
+      {/* 🔥 Forgot Password */}
+      {mode === "forgot" && (
+        <ForgotPassword
+          onClose={() => setMode(null)}
+          switchtologin={() => setMode("login")}
         />
       )}
     </>
   )
 }
 
-export default Navbar
+export default Navbar;

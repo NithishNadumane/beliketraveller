@@ -5,10 +5,11 @@ const check = ({ districtId }) => {
      const [rentals, setRentals] = useState([]);
       const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const API = process.env.NEXT_PUBLIC_API_URL;
   const fetchrentals = async () => {
     try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:5000/api/rentals/${districtId}`);
+        const response = await axios.get(`${API}/api/rentals/${districtId}`);
         setRentals(response.data);
       } catch (err) {
         console.error("Error fetching rentals:", err);

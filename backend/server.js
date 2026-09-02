@@ -14,6 +14,7 @@ import rentalroutes from "./routes/rentalroutes.js";
 import imageplaceRoutes from "./routes/imagesplaceRoutes.js";
 import travelagencyroutes from "./routes/travelagency.js";
 import foodroutes from "./routes/foodroutes.js";
+import travelreelroutes from "./routes/travelreelroutes.js";
 
 dotenv.config();
 
@@ -49,7 +50,8 @@ app.use("/api/chat", chatroutes);
 app.use("/api/rentals", rentalroutes);
 app.use("/api/imagesplace", imageplaceRoutes);
 app.use('/api/travelagencies', travelagencyroutes);
-app.use("/api/stayfood",foodroutes)                                                 
+app.use("/api/stayfood", foodroutes);                                           
+app.use("/api/travelreels", travelreelroutes)
 
 /* =======================
    HEALTH CHECK

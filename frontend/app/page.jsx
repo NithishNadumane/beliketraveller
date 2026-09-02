@@ -18,20 +18,32 @@ export default function HomePage() {
           Start Your Journey
         </h2>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">  
-          <Link
-            href="/travelagency"
-            className="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition"
-          >
-             <img src="https://www.tripinnholiday.com/images/packages/pkg-01-002-02.jpg" alt="Editing Services" className="w-full h-48 object-cover rounded-lg mb-3"/>
-            <h3 className="text-xl font-semibold mb-2">Travel agency</h3>
-            <p>Book curated travel packages and guided tours with our partner agencies.</p>
-          </Link>
+        <a
+  href="https://your-travel-recommendation-website.com"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition block"
+>
+  <img
+    src="https://www.tripinnholiday.com/images/packages/pkg-01-002-02.jpg"
+    alt="Travel Recommendation"
+    className="w-full h-48 object-cover rounded-2xl mb-3"
+  />
+
+  <h3 className="text-xl font-semibold mb-2">
+    Travel Recommendation
+  </h3>
+
+  <p>
+    Discover personalized travel recommendations, destinations, and experiences.
+  </p>
+</a>
 
           <Link
             href="/editing"
             className="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition"
           >
-            <img src="https://retouchinglabs.com/wp-content/uploads/2023/11/travel-video-editing-service-retouchinglabs-737x628.jpg" alt="Editing Services" className="w-full h-48 object-cover rounded-lg mb-3"/>
+             <img src="https://retouchinglabs.com/wp-content/uploads/2023/11/travel-video-editing-service-retouchinglabs-737x628.jpg" alt="Editing Services" className="w-full h-48 object-cover rounded-lg mb-3"/>
             <h3 className="text-xl font-semibold mb-2">Editing Services</h3>
             <p>
                 Professional photo and video editing to make your travel memories more
@@ -50,25 +62,24 @@ export default function HomePage() {
             </p>
           </Link>
 
-          <Link
-            href="/hotels"
-            className="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition"
-          >
-             <img src="https://cdn.pixabay.com/photo/2014/05/16/04/13/log-huts-345360_960_720.jpg" alt="Editing Services" className="w-full h-48 object-cover rounded-lg mb-3"/>
-            <h3 className="text-xl font-semibold mb-2">Hotels & Stays</h3>
-            <p>
-              Find the best hotels, homestays, and restaurants across Karnataka.
-            </p>
-          </Link>
+      
 
-          <Link
-            href="/rentals"
-            className="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition"
-          >
-             <img src="https://manalimotorbikerental.com/wp-content/uploads/2022/12/Manali-motot-bike-rental.jpg" alt="Editing Services" className="w-full h-48 object-cover rounded-lg mb-3"/>
-            <h3 className="text-xl font-semibold mb-2">Rentals</h3>
-            <p>Book affordable bike & car rentals for your next adventure.</p>
-          </Link>
+        <Link
+  href="/travelreels"
+  className="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition"
+>
+  <img
+    src="https://www.infoflick.com/news_images/2026/04/top-10-places-to-visit-in-karnataka-complete-travel-guide1776154718.jpeg"
+    alt="Travel Reels"
+    className="w-full h-48 object-cover rounded-lg mb-3"
+  />
+
+  <h3 className="text-xl font-semibold mb-2">Travel Reels</h3>
+
+  <p>
+    Explore travel reels, discover amazing places, and share your travel experiences.
+  </p>
+</Link>
 
           <Link
             href="/reviews"

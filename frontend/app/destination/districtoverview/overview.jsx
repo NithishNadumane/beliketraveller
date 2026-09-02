@@ -4,6 +4,8 @@ import BlurText from "../designcomp/districtname";
 import Picture from "../component/picture";
 import Chatbot from "../component/chatbot";
 import Category from "../component/category";
+import Travelreel from "../component/travel_reel"
+import Upload from "../../travelreels/components/UploadReelCTA"
 
 const DistrictOverview = ({ districtdata }) => {
   return (
@@ -52,6 +54,11 @@ const DistrictOverview = ({ districtdata }) => {
           districtName={districtdata.name}
         />
       </div>
+      <Travelreel
+  districtId={districtdata.id}
+  reelType="district"
+/>
+      <Upload/>
     </>
   );
 };

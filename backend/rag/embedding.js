@@ -5,6 +5,7 @@ dotenv.config();
 
 export const generateEmbedding = async (text) => {
   try {
+    console.time("Embedding");
     const response = await axios.post(
       "https://api.jina.ai/v1/embeddings",
       {
@@ -18,6 +19,7 @@ export const generateEmbedding = async (text) => {
         }
       }
     );
+    console.timeEnd("Embedding");
 
     return response.data.data.map(d => d.embedding);
 

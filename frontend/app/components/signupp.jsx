@@ -10,11 +10,11 @@ const Signup = ({ onClose, switchtologin }) => {
   const [otp, setotp] = useState("");
   const [otpsent, setotpsent] = useState(false);
   const [showPassword, setShowPassword] = useState(false); // 👁️ toggle state
-
+ const API = process.env.NEXT_PUBLIC_API_URL;
   async function handleotp() {
     try {
       if (!email) return alert("Please enter your email first!");
-      const response = await axios.post("http://localhost:5000/api/auth/send-otp", { email });
+      const response = await axios.post(`${API}/api/auth/send-otp`, { email });
       alert(response.data.message);
       setotpsent(true);
     } catch (error) {
@@ -25,7 +25,7 @@ const Signup = ({ onClose, switchtologin }) => {
   async function handelsignup(e) {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/signup", {
+      const response = await axios.post(`${API}/api/auth/signup`, {
         name,
         email,
         password,

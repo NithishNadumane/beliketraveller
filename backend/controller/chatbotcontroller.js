@@ -1,55 +1,94 @@
-import axios from "axios";
 import dotenv from "dotenv";
+import { GoogleGenAI } from "@google/genai";
 import { retrieveContext } from "../rag/retrieveContext.js";
 
 dotenv.config();
 
-const HF_API_URL = "https://router.huggingface.co/v1/chat/completions";
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+});
 
-export const chatWithLlama = async (req, res) => {
+export const chatWithGemini = async (req, res) => {
   try {
     const userMessage = req.body.message;
 
-    let context = "";
-
-    // 🔥 only run RAG for meaningful queries
-    if (userMessage.length > 8) {
-      context = await retrieveContext(userMessage);
+    if (!userMessage || typeof userMessage !== "string") {
+      return res.status(400).json({
+        error: "Message is required",
+      });
     }
 
-    const payload = {
-      model: "meta-llama/Llama-3.1-8B-Instruct", // ⚡ faster model
-      messages: [
-        {
-          role: "system",
-          content: "You are BeLikeTraveller — a friendly AI travel companion."
-        },
-        {
-          role: "system",
-          content: `Use this travel knowledge:\n${context}`
-        },
-        {
-          role: "user",
-          content: userMessage
-        }
-      ],
-    };
+    let context = "";
 
-    const response = await axios.post(HF_API_URL, payload, {
-      headers: {
-        Authorization: `Bearer ${process.env.HF_API_KEY}`,
-        "Content-Type": "application/json",
+    // Retrieve RAG information for meaningful queries
+    if (userMessage.trim().length > 8) {
+      console.time("RAG");
+
+      context = await retrieveContext(userMessage);
+
+      console.timeEnd("RAG");
+    }
+
+    const systemInstruction = `
+You are BeLikeTraveller — a friendly AI travel companion.
+
+You help users with travel-related questions, especially destinations,
+places to visit, food, activities, hotels, routes, attractions and
+experiences in Karnataka.
+
+IMPORTANT:
+
+1. Understand the user's question first.
+
+2. If the question is travel-related:
+   - Use the retrieved travel information below when it is relevant.
+   - Combine the retrieved information with your general knowledge.
+   - Do not restrict your answer only to the retrieved information.
+   - If the user asks for a list, provide as many useful destinations as
+     requested.
+   - Prefer information from the retrieved travel data when available.
+   - Do not make up specific details that are clearly unsupported by the
+     retrieved information.
+
+3. If the question is NOT travel-related:
+   - Answer normally using your general knowledge.
+   - Do not force the travel information into the answer.
+
+4. Never mention RAG, retrieval, embeddings, vector databases, context,
+   or internal implementation details.
+
+5. Be friendly, helpful and conversational.
+
+RETRIEVED TRAVEL INFORMATION:
+${context || "No specific travel information was retrieved."}
+`;
+
+    console.time("Gemini");
+
+    const response = await ai.models.generateContent({
+      model: "gemini-3.5-flash-lite",
+      contents: userMessage,
+      config: {
+        systemInstruction,
+        temperature: 0.7,
       },
     });
 
+    console.timeEnd("Gemini");
+
     const reply =
-      response.data?.choices?.[0]?.message?.content ||
-      "Sorry, I didn’t understand that.";
+      response.text?.trim() ||
+      "Sorry, I couldn't generate a response.";
 
-    res.json({ reply });
+    return res.status(200).json({
+      reply,
+    });
 
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "RAG error" });
+  } catch (error) {
+    console.error("Gemini chat error:", error);
+
+    return res.status(500).json({
+      error: "AI response failed",
+    });
   }
 };

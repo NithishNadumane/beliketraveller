@@ -117,3 +117,23 @@ export const login = async (req, res) => {
     res.status(500).json({ message: "Login failed" });
   }
 };
+
+export const resetPasswordWithOTP = async (req, res) => {
+  const { email, otp, password } = req.body;
+
+  const record = otpstore.get(email);
+
+  if (!record || record.otp !== otp || Date.now() > record.expiresAt)
+    return res.status(400).json({ message: "Invalid OTP" });
+
+  otpstore.delete(email);
+
+  const hashed = await bcrypt.hash(password, 10);
+
+  await pool.query(
+    "UPDATE users SET password=$1 WHERE email=$2",
+    [hashed, email]
+  );
+
+  res.json({ message: "Password updated" });
+};

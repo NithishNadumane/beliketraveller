@@ -4,7 +4,7 @@ import axios from "axios";
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-
+const API = process.env.NEXT_PUBLIC_API_URL;
   const handleKeyPress = async (e) => {
     if (e.key === "Enter" && input.trim()) {
       const newMessage = { sender: "user", text: input };
@@ -13,7 +13,7 @@ const Chatbot = () => {
       setInput("");
 
       try {
-        const res = await axios.post("http://localhost:5000/api/chat", {
+        const res = await axios.post(`${API}/api/chat`, {
           message: userInput,
         });
         const botMessage = { sender: "bot", text: res.data.reply };

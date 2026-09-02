@@ -7,10 +7,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  top: 0;
-  z-index: 100;
-  left:0;
-  right:0;
   font-family: 'Segoe UI', sans-serif;
 }
 

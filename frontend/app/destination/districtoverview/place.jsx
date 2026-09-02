@@ -4,7 +4,8 @@ import axios from "axios";
 import Video from "../component/video";
 import Review from "../component/Review";
 import Chatbot from "../component/chatbot";
-
+import Upload from "../../travelreels/components/UploadReelCTA";
+import Travelreel from "../component/travel_reel";
 export default function PlaceOverview({ placedata }) {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -87,7 +88,7 @@ export default function PlaceOverview({ placedata }) {
           </div>
 
           {/* VIDEO */}
-          <div>
+          {/* <div>
             <h2 className="text-2xl font-semibold mb-4">
               Recommended Video
             </h2>
@@ -95,7 +96,7 @@ export default function PlaceOverview({ placedata }) {
             <div className="bg-white rounded-xl shadow-md p-4">
               <Video />
             </div>
-          </div>
+          </div> */}
 
         </div>
 
@@ -128,7 +129,12 @@ export default function PlaceOverview({ placedata }) {
       <div className="max-w-7xl mx-auto px-6 py-10">
         <Chatbot />
       </div>
-
+      <Travelreel
+  districtId={placedata.district_id}
+  placeId={placedata.id}
+  reelType="place"
+/>
+<Upload/>
     </div>
   );
 }

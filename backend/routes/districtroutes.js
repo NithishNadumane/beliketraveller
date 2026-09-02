@@ -1,5 +1,10 @@
 import express from 'express';
 const router = express.Router();
-import { getdistricts } from '../controller/districtcontroller.js';
-router.get('/:district',getdistricts);
+import {
+  getdistricts,
+  getAllDistricts
+} from "../controller/districtcontroller.js";
+router.get("/", getAllDistricts);
+
+router.get('/:district', getdistricts);
 export default router;

@@ -1,5 +1,5 @@
 import express from "express";
-import { sendotp, signup, login } from "../controller/authcontroller.js";
+import { sendotp, signup, login, resetPasswordWithOTP } from "../controller/authcontroller.js";
 
 const router = express.Router();
 
@@ -11,5 +11,6 @@ router.post("/send-otp", sendotp);
 
 // Signup route (verifies OTP internally)
 router.post("/signup", signup);
+router.post("/reset-password-otp", resetPasswordWithOTP);
 
 export default router;

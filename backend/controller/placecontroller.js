@@ -13,4 +13,41 @@ export async function getplace(req, res) {
     console.error("error fetching place:", error);
 
   }
- }
+}
+ 
+export async function getPlacesByDistrict(req, res) {
+
+  const districtId = Number(req.params.districtId);
+
+  try {
+
+    const result = await pool.query(
+      `
+      SELECT
+        id,
+        district_id,
+        name,
+        description,
+        address
+      FROM places
+      WHERE district_id = $1
+      ORDER BY name
+      `,
+      [districtId]
+    );
+
+    return res.status(200).json(result.rows);
+
+  } catch (error) {
+
+    console.error(
+      "Get places by district error:",
+      error.message
+    );
+
+    return res.status(500).json({
+      error: "Failed to fetch places"
+    });
+
+  }
+}
